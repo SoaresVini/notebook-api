@@ -1,12 +1,26 @@
 namespace :dev do
   desc "Configura o ambiente de desenvolvimento"
   task setup: :environment do
+    
+    puts "Resetando o Banco......"
     %x(rails db:drop) 
     %x(rails db:create) 
     %x(rails db:migrate)
+
+    puts "[Populando Banco]"
+
+    puts "Criando tipos de contato......"
     %x(rails dev:kinds)
+
+    puts "Criando contatos......"
     %x(rails dev:contacts)
+
+    puts "Criando Telefones......"
     %x(rails dev:phones)
+
+    puts "Criando Endereços......"
+    %x(rails dev:address)
+    puts "[Finalizado]"
   end
 
   desc "Criar contato"
@@ -36,9 +50,23 @@ namespace :dev do
   task phones: :environment do
     Contact.all.each do |contact|
       rand(5).times do |i|
-        Phone.create!(number:Faker::PhoneNumber.cell_phone, contact: contact)
+        Phone.create!(
+          number:Faker::PhoneNumber.cell_phone, 
+          contact: contact)
       end
     end
   end
+
+  desc "Criar endereço"
+  task address: :environment do
+    Contact.all.each do |contact|
+      Address.create!(
+        street: Faker::Address.street_address,
+        city: Faker::Address.city,
+        contact: contact
+      )
+    end
+  end
+
 end
 
