@@ -1,3 +1,3 @@
 class Address < ApplicationRecord
-  belongs_to :contact, optional: true
+  belongs_to :contact
 end
