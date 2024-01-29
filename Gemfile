@@ -19,6 +19,8 @@ gem "active_model_serializers"
 gem "puma", "~> 5.0"
 
 gem "awesome_print"
+
+gem 'jwt'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 

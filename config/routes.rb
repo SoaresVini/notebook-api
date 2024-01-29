@@ -1,10 +1,20 @@
 Rails.application.routes.draw do
   resources :kinds
+  resources :auths, only: [:create, :show]
+  
   resources :contacts do 
     resource :kind, only: [:show]
     resource :kind, only: [:show], path: 'relationships/kind'
-  end
 
+    resource :phones, only: [:show]
+    resource :phones, only: [:show], path: 'relationships/phones'
+    resource :phone, only: [:update, :create, :destroy]
+    resource :phone, only: [:update, :create, :destroy], path: 'relationships/phone'
+
+    resource :address, only: [:show, :update, :create, :destroy]
+    resource :address, only: [:show, :update, :create, :destroy], path: 'relationships/address'
+
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
