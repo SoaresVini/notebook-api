@@ -1,11 +1,15 @@
 class ContactsController < ApplicationController
+  include ErrorSerializer
   before_action :set_contact, only: %i[ show update destroy ]
 
   # GET /contacts
   def index
-    @contacts = Contact.all
 
-    render json: @contacts, include: [:kind, :address, :phones]
+    pege = params[:page].try(:[], :number)
+    per_page = params[:page].try(:[], :size)
+
+    @contacts = Contact.all.page(pege).per(per_page)
+    render json: @contacts #, include: [:kind, :address, :phones]
   end
 
   # GET /contacts/1
@@ -20,7 +24,7 @@ class ContactsController < ApplicationController
     if @contact.save
       render json: @contact , status: :created, location: @contact
     else
-      render json: @contact.errors, status: :unprocessable_entity
+      render json: ErrorSerializer.serialize(@contact.errors)
     end
   end
 

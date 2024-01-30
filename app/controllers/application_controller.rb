@@ -1,10 +1,17 @@
-class ApplicationController < ActionController::API
+class ApplicationController < ActionController::Base
+  include DeviseTokenAuth::Concerns::SetUserByToken
+  include DeviseRackSessionFix
+  
+  # before_action :ensure_json_request
 
-  #antes de qualquer coisa garanta que o reterno é em JSON
-# before_action :ensure_json_request
-
-# def ensure_json_request
-#   return if request.headers["Accept"] =~ /json/
-#   render :nothing => true, :status => 406
-# end
+  # def ensure_json_request
+  #   unless request.headers["Accept"] =~ /vnd\.api\+json/
+  #     render body: nil, :status => 406
+  #   else
+  #     unless request.get?
+  #       return if request.headers["Content-Type"] =~ /vnd\.api\+json/
+  #       render body: nil, :status => 415
+  #     end
+  #   end
+  #end
 end
