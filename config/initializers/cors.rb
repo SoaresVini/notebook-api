@@ -5,12 +5,14 @@
 
 # Read more: https://github.com/cyu/rack-cors
 
-# rails.application.config.middleware.insert_before 0, rack::cors do
+# Rails.application.config.middleware.insert_before 0, rack.cors do
 #   allow do
-#     origins "example.com"
+#     origins '*'
 
-#     resource "*",
-#       headers: :any,
-#       methods: [:get, :post, :put, :patch, :delete, :options, :head]
+#     resource '*',
+#              headers: :any,
+#              methods: %i[get post put patch delete options head]
 #   end
 # end
+
+# Rails.application.config.middleware.use 'AppName'

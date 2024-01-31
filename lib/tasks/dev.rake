@@ -4,22 +4,24 @@ namespace :dev do
     
     puts "Resetando o Banco......"
     %x(rails db:drop) 
+    puts "Criando o Banco......"
     %x(rails db:create) 
+    puts "Migrando o Banco......"
     %x(rails db:migrate)
 
-    puts "[Populando Banco]"
+    puts "[Finalizado]"
 
+    puts "[Populando Banco]"
+    
     puts "Criando tipos de contato......"
     %x(rails dev:kinds)
-
+    puts "Criando Endereços......"
+    %x(rails dev:address)
     puts "Criando contatos......"
     %x(rails dev:contacts)
-
     puts "Criando Telefones......"
     %x(rails dev:phones)
 
-    puts "Criando Endereços......"
-    %x(rails dev:address)
     puts "[Finalizado]"
   end
 

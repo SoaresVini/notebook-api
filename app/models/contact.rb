@@ -1,8 +1,8 @@
 class Contact < ApplicationRecord
 
-  #Validações
+  # Validações
   validates_presence_of :kind
-  validates_presence_of :address
+  # validates_presence_of :address
 
   # Associação
   belongs_to :kind

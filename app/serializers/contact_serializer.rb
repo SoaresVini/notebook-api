@@ -1,28 +1,28 @@
 class ContactSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :birthdate #,:author
+  attributes :id, :name, :email, :birthdate # ,:author
 
-  belongs_to :kind do 
-    link(:related) {
+  belongs_to :kind do
+    link(:related) do
       contact_kind_url(object.id)
-    }
+    end
   end
 
-  has_many :phones do 
-    link(:related) {
+  has_many :phones do
+    link(:related) do
       contact_phones_url(object.id)
-    }
+    end
   end
 
-  has_one :address do 
-    link(:related) {
+  has_one :address do
+    link(:related) do
       contact_address_url(object.id)
-    }
+    end
   end
 
-  meta do 
-    { 
-      author: "Vinicius", 
-      ano: 2024 
+  meta do
+    {
+      author: 'Vinicius',
+      ano: 2024
     }
   end
 
@@ -33,15 +33,14 @@ class ContactSerializer < ActiveModel::Serializer
     h
   end
 
-  # def author 
+  # def author
   #   "VINICIUS O CATS"
   # end
 
-  #Dados sobre o proprio JSON
-  
-  #links por path
-  # link(:self) { 
+  # Dados sobre o proprio JSON
+
+  # links por path
+  # link(:self) {
   #   contact_url(object.id) # Ou usar path
   # }
-  
 end
